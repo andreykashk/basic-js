@@ -13,8 +13,19 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default class DepthCalculator {
-  calculateDepth(/* arr */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  calculateDepth( arr ) {
+    function inArr (arr1, count) {
+      let res = count;
+      for(let i = 0; i < arr1.length ; i++) {
+        if (Array.isArray(arr1[i])) {
+          let subInArr = inArr(arr1[i], count + 1);
+          if(subInArr > res) {
+            res = subInArr;
+          }
+        }
+      }
+      return res;
+    }
+    return inArr(arr, 1);
   }
 }
